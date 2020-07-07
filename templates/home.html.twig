@@ -8,7 +8,23 @@
     <title>Mon application</title>
 </head>
 <body>
-    <h1>Bonjour à tous</h1>
+
     <p>Comment allez vous ?!</p>
+
+    {#
+    {% if age >= 18 %}
+        <p>Vous êtes un adulte.</p>
+    {% else %}
+        <p>Vous êtes mineur.</p>
+    {% endif %}
+    #}
+
+    {% for prenom, age in tableau %}
+        {% if loop.first %}
+            <strong>{{ prenom }} a {{ age }} ans</strong>
+        {% else %}
+            <p>(iteration numéro {{ loop.index0 }}) : {{ prenom }} a {{ age }} ans</p>
+        {% endif %}
+    {% endfor %}
 </body>
 </html>
