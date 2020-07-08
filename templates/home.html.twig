@@ -1,15 +1,9 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Mon application</title>
-</head>
-<body>
+{% extends 'base.html.twig' %}
 
+{% block body %}
+    <h1>{{ title | upper }}</h1>
     <p>Comment allez vous ?!</p>
+    <a href="{{ path('hello_base') }}">Aller voir Hello</a>
 
     {#
     {% if age >= 18 %}
@@ -26,5 +20,4 @@
             <p>(iteration numéro {{ loop.index0 }}) : {{ prenom }} a {{ age }} ans</p>
         {% endif %}
     {% endfor %}
-</body>
-</html>
+{% endblock %}

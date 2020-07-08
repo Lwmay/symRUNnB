@@ -15,7 +15,13 @@ class HomeController extends AbstractController {
      * @return Response
      */
     public function hello($prenom = anonyme) {
-        return new Response("Bonjour " . $prenom);
+        return $this->render(
+            'hello.html.twig',
+            [
+                'prenom' => $prenom,
+                'age' => age
+            ]
+        );
     }
 
     /**
