@@ -9,11 +9,11 @@
 
         {{ form_start(form) }}
 
-        {{ form_widget(form) }}
+        <div class="form-group">
+            {{ form_label(form.title) }}
+            {{ form_widget(form.title, { 'attr': {'class': 'form-control', 'placeholder': 'Titre de l\'annonce'}}) }}
+        </div>
 
-        <button type="submit" class="btn btn-primary">Créer une annonce</button>
-
-        {{ form_end(form) }}
     </div>
 
 {% endblock %}
