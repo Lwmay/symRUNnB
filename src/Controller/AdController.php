@@ -7,6 +7,7 @@ use App\Entity\Image;
 use App\Form\AdType;
 use App\Repository\AdRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -42,7 +43,6 @@ class AdController extends AbstractController
 
         $form = $this->createForm(AdType::class, $ad);
 
-
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
@@ -66,6 +66,47 @@ class AdController extends AbstractController
 
         return $this->render('ad/new.html.twig', [
             'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * Permet d'afficher le formulaire d'édition
+     *
+     * @Route("/ads/{slug}/edit", name="ads_edit")
+     *
+     * @param Ad $ad
+     * @param Request $request
+     * @param ObjectManager $manager
+     * @return Response
+     */
+    public function edit(Ad $ad, Request $request, EntityManagerInterface $manager){
+
+        $form = $this->createForm(AdType::class, $ad);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            foreach ($ad->getImages() as $image) {
+                $image->setAd($ad);
+                $manager->persist($image);
+            }
+
+            $manager->persist($ad);
+            $manager->flush();
+
+            $this->addFlash(
+                'sucess',
+                "Les modifications de l'annonce <strong>{$ad->getTitle()}</strong> a bien été enregistrée !"
+            );
+
+            return $this->redirectToRoute('ads_show', [
+                'slug' => $ad->getSlug()
+            ]);
+        }
+
+        return $this->render('ad/edit.html.twig', [
+            'form' => $form->createView(),
+            'ad' => $ad
         ]);
     }
 

@@ -7,10 +7,16 @@ use Cocur\Slugify\Slugify;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=AdRepository::class)
  * @ORM\HasLifecycleCallbacks
+ * @UniqueEntity(
+ *     fields={"title"},
+ *     message="Une autre annonce possède déja ce titre."
+ * )
  */
 class Ad
 {
@@ -23,6 +29,7 @@ class Ad
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min=10, max=250, minMessage="Le tittre doit faire plus de 10 caractères.")
      */
     private $title;
 
@@ -38,6 +45,7 @@ class Ad
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\Length(min=20, minMessage="Votre introduction doit faire plus de 10 caractères.")
      */
     private $introduction;
 
@@ -48,6 +56,7 @@ class Ad
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Url()
      */
     private $coverImage;
 
@@ -58,6 +67,7 @@ class Ad
 
     /**
      * @ORM\OneToMany(targetEntity=Image::class, mappedBy="ad", orphanRemoval=true)
+     * @Assert\Valid()
      */
     private $images;
 
@@ -72,7 +82,7 @@ class Ad
      * @ORM\PrePersist
      * @ORM\PreUpdate
      *
-     * @ return void
+     * @return void
      */
     public function initializeSlug() {
         if(empty($this->slug)) {
