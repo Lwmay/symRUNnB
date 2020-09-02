@@ -76,7 +76,7 @@ class AdController extends AbstractController
     }
 
     /**
-     * Permet d'afficher le formulaire d'édition
+     * Permet d'afficher le formulaire d édition
      *
      * @Route("/ads/{slug}/edit", name="ads_edit")
      * @Security("is_granted('ROLE_USER') and user === ad.getAuthor()", message="Cette annonce ne vous appartient pas,
@@ -135,8 +135,8 @@ class AdController extends AbstractController
     /**
      * Permet de supprimer une annonce.
      *
-     * @Route ("/ads/{slug}/delete", name="ads_delete")
-     * @Security ("is_granted("ROLE_USER") and user == ad.getAuthor()", message="Vous n'avez pas les droits.")
+     * @Route("/ads/{slug}/delete", name="ads_delete")
+     * @Security("is_granted('ROLE_USER') and user == ad.getAuthor()", message="Vous n'avez pas les droits.")
      *
      * @param Ad $ad
      * @param EntityManagerInterface $manager
@@ -149,7 +149,7 @@ class AdController extends AbstractController
 
         $this->addFlash(
             'success',
-            "L'annonce a bien été supprimée."
+            "L annonce a bien été supprimée."
         );
 
         return $this->redirectToRoute("ads_index");
