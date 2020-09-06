@@ -8,13 +8,13 @@
 
 {% block body %}
     <div class="container">
-        <h1>Réserver pour l'annonce {{ ad.title }}</h1>
+        <h1>Réserver pour l'annonce <em>{{ ad.title }}</em></h1>
         <p>Vous êtes sur le point de réserver le bien de {{ ad.author.firstName }} {{ ad.author.lastName }},
         dites nous tout, on s'occupe du reste.</p>
 
         {{ form_start(form) }}
         <div class="alert alert-light">
-            <h2>Quelles sont vos dates ?</h2>
+            <h4>Quelles sont vos dates ?</h4>
             <div class="row">
                 <div class="col">
                     {{ form_row(form.startDate) }}
@@ -25,7 +25,7 @@
             </div>
 
             <h4 class="mt-3">Montant du séjour : <span id="amount">...</span> &euro;</h4>
-            <span id="days">0</span> nuit(s) à {{ ad.price }} par nuit
+            <span id="days">0</span> nuit(s) à {{ ad.price | number_format(2, ',', ' ') }} &euro; par nuit
 
             <h4 class="mt-3">Votre commentaire :</h4>
             {{ form_row(form.comment) }}
