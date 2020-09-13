@@ -25,10 +25,10 @@ class BookingController extends AbstractController
      * @param EntityManagerInterface $manager
      * @return Response
      */
-    public function book(Ad $ad, Request $request, EntityManagerInterface $manager)
-    {
-        $booking = new Booking();
-        $form = $this->createForm(BookingType::class, $booking);
+        public function book(Ad $ad, Request $request, EntityManagerInterface $manager)
+        {
+            $booking = new Booking();
+            $form = $this->createForm(BookingType::class, $booking);
 
         $form->handleRequest($request);
 

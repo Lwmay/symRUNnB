@@ -40,7 +40,7 @@ class AppFixtures extends Fixture
         $adminUser = new User();
         $adminUser->setFirstName('Laurent')
             ->setLastName('May')
-            ->setEmail('may@synfony.com')
+            ->setEmail('may@symfony.com')
             ->setHash($this->encoder->encodePassword($adminUser, 'password'))
             ->setPicture('https://randomuser.me/api/portraits/men/41.jpg')
             ->setIntroduction($faker->sentence())
