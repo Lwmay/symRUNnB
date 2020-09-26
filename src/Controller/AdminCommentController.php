@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminCommentController extends AbstractController
 {
     /**
-     * @Route("/admin/comments/{page<\d+>?1", name="admin_comments_index")
+     * @Route("/admin/comments/{page<\d+>?1}", name="admin_comments_index")
      * @param CommentRepository $repository
      * @param $page
      * @param Pagination $pagination
