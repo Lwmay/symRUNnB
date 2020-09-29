@@ -64,3 +64,17 @@ DirectoryIndex index.php
         # RedirectTemp cannot be used instead
     </IfModule>
 </IfModule>
+
+<IfModule mod_php7.c>
+
+    ##
+    ## adjust memory limit
+    php_value memory_limit 512M
+
+    ## adjust maximum time in seconds a script is allowed to run
+    php_value max_execution_time 600
+
+    ## enable error messages
+    php_flag display_errors on
+
+</IfModule>
